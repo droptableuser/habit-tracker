@@ -1,0 +1,28 @@
+<html>
+
+  <head>
+    <link rel="stylesheet" type="text/css" href="calendar-heatmap.css">
+    <script src="calendar-heatmap.js"></script>
+    <script type="text/javascript" src="datas.json"></script>
+
+  </head>
+
+  <body>
+    <div class="habit_map"></div>
+    <script type="text/javascript">
+      $.getJSON("datas.json", function (json) {
+        var chartData = json.chartData;
+        var now = moment().endOf('day').toDate();
+        var yearAgo = moment().startOf('day').subtract(1, 'year').toDate();
+        var heatmap = calendarHeatmap()
+          .data(chartData)
+          .selector('.habit_map')
+          .tooltipEnabled(true)
+          .colorRange(['#f4f7f7', '#79a8a9']);
+        heatmap();  // render the chart
+      });
+    </script>
+
+  </body>
+
+</html>
